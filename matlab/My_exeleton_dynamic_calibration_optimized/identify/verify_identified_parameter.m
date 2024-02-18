@@ -30,19 +30,21 @@ end
 t = linspace(0, n-1, n) * traj_Ts;
 for ii = 1:6
     figure(ii);
-    plot(t, T(:, ii), 'b', 'LineWidth', 1.0); hold on;
+    plot(t, T(:, ii), 'k --', 'LineWidth', 1.0); hold on;
     plot(t, T_idy(:, ii), 'r', 'LineWidth', 1.0);
     plot(t, T(:, ii) - T_idy(:, ii), 'g', 'LineWidth', 1.0); hold off;
     ylabel('力矩(Nm)');
+    xlabel('时间(t)');
     legend('采集力矩', '辨识力矩', '相对误差')
-    title(['第', num2str(ii), '关节辨识参数验证'])
+    title(['第', num2str(ii), '关节采集力矩与辨识力矩比较'])
     print(ii, '-dpng', '-r600', ['.\figs\idy\idy', num2str(ii), '.png']);
 end
 for jj = 1:6
     figure(jj + 6);
     plot(t, T(:, jj) - T_idy(:, jj), 'g', 'LineWidth', 1.0);
-    title(['第', num2str(jj), '关节辨识参数误差']);
-    ylabel('力矩(Nm)')
+    title(['第', num2str(jj), '关节辨识误差']);
+    ylabel('力矩(Nm)');
+    xlabel('时间(t)');
     print(6 + jj, '-dpng', '-r600', ['.\figs\diff\diff', num2str(jj), '.png']);
 end
 

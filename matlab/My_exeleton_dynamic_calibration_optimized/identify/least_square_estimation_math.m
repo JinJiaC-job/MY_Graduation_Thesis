@@ -10,7 +10,7 @@ qdd_filt = evalin('base', 'qdd_filt');
 t_filt = evalin('base', 't_filt');
 % DH和负载参数 % 单位：mm
 fe1 = 0; fe2 = 0; fe3 = 0; ne1 = 0; ne2 = 0; ne3 = 0;
-d2 = -188.76; d3 = -81.24; d5 = 12.15; d6 = 112;
+d2 = -188.76; d3 = -81.24; d5 = -12.15; d6 = 112;
 a5 = 252.5; alp4 = 4/9*pi; g = 9802;
 
 % 最小参数集

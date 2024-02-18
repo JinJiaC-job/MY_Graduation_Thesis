@@ -150,7 +150,7 @@ L1 = Link('a', 0, 'alpha', 0, 'theta', 0, 'prismatic', 'modified');L1.qlim = [0,
 L2 = Link('d', -188.76, 'a', 0, 'alpha', -pi/2, 'modified');L2.qlim = [-30, 90]* pi / 180;
 L3 = Link('d', -81.24,  'a', 0, 'alpha', pi/2, 'modified');L3.qlim = [-120, 30]* pi / 180;
 L4 = Link('d', 0,       'a', 0,   'alpha', 4/9*pi, 'modified');L4.qlim = [-210, -30]* pi / 180;
-L5 = Link('d', 12.15,  'a', 252.5, 'alpha', 0, 'modified');L5.qlim = [60, 210]* pi / 180;
+L5 = Link('d', -12.15,  'a', 252.5, 'alpha', 0, 'modified');L5.qlim = [60, 210]* pi / 180;
 L6 = Link('d', 112,  'a', 0,   'alpha', pi/2, 'modified');L6.qlim = [-90, 90]* pi / 180;
 % L7 = Link('d', 388.96,  'a', 0,   'alpha', 0);
 % L1.qlim([-170, 170] * pi / 180);
@@ -216,24 +216,24 @@ for i = 1:traj_n
     end
 end
 
-% %% 可达空间
-% lim_max = [170 120 170 120 170 120];
-% lim_min = [-170 -120 -170 -120 -170 -120];
-% 
-% sample_pnts = 3e6; 
-% q_rand = zeros(sample_pnts, 6);
-% for i = 1:6
-%     q_rand(:, i) = (lim_min(i) + (lim_max(i)) * rand(sample_pnts, 1)) * pi / 180;
-% end
-% 
-% fpos = ske_modDH.fkine(q_rand);
-% x = zeros(sample_pnts, 1);
-% y = zeros(sample_pnts, 1);
-% z = zeros(sample_pnts, 1);
-% for n = 1:1:sample_pnts
-%     x(n) = fpos(n).t(1);
-%     y(n) = fpos(n).t(2);
-%     z(n) = fpos(n).t(3);
-% end
-% plot3(x, y, z, 'r.', 'MarkerSize', 1.0);
+%% 可达空间
+lim_max = [170 120 170 120 170 120];
+lim_min = [-170 -120 -170 -120 -170 -120];
+
+sample_pnts = 3e6; 
+q_rand = zeros(sample_pnts, 6);
+for i = 1:6
+    q_rand(:, i) = (lim_min(i) + (lim_max(i)) * rand(sample_pnts, 1)) * pi / 180;
+end
+
+fpos = ske_modDH.fkine(q_rand);
+x = zeros(sample_pnts, 1);
+y = zeros(sample_pnts, 1);
+z = zeros(sample_pnts, 1);
+for n = 1:1:sample_pnts
+    x(n) = fpos(n).t(1);
+    y(n) = fpos(n).t(2);
+    z(n) = fpos(n).t(3);
+end
+plot3(x, y, z, 'r.', 'MarkerSize', 1.0);
 
