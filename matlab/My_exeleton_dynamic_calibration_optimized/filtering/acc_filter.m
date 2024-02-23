@@ -31,19 +31,31 @@ elseif mode == "sensor"
 end
 qdd_filt = filtfilt(b, a, qdd_pre_filt);
 % 中值滤波和移动平均滤波
-for i = 1:6
-    qdd_med_filt = medfilt1(qdd_filt(:, i), 10);
-    qdd_smooth_filt = smooth(qdd_med_filt, 20, 'rloess');
-    qdd_filt(:, i) = qdd_smooth_filt;
-end
+% for i = 1:6
+%     qdd_med_filt = medfilt1(qdd_filt(:, i), 10);
+%     qdd_smooth_filt = smooth(qdd_med_filt, 20, 'rloess');
+%     qdd_filt(:, i) = qdd_smooth_filt;
+% end
 % qdd_filt = smooth(qdd_pre_filt, 'rloess');
 
 %% VISUALIZATION
 for i = 1:6
+    if i==1
 	figure(i + 12); 
 	plot(qdd_pre_filt(:,i), 'g', 'LineWidth', 1.0); hold on;
 	plot(qdd_filt(:, i), 'r', 'LineWidth', 0.5); hold off;
 	title(['第', num2str(i), '关节加速度滤波结果'], 'FontSize', 17, 'FontName', '宋体');
+    xlabel('采样点', 'FontSize', 17, 'FontName', '宋体');
+	ylabel('关节加速度(mm/s^{2})', 'FontSize', 17, 'FontName', '宋体');
+	legend('滤波前', '滤波后', 'FontName', '宋体', 'FontSize', 12);
+    print(i + 12, '-dpng', '-r600', [path_prefix, 'Joint', num2str(i), 'Acc.png'])
+    end
+
+    figure(i + 12); 
+	plot(qdd_pre_filt(:,i), 'g', 'LineWidth', 1.0); hold on;
+	plot(qdd_filt(:, i), 'r', 'LineWidth', 0.5); hold off;
+	title(['第', num2str(i), '关节加速度滤波结果'], 'FontSize', 17, 'FontName', '宋体');
+    xlabel('采样点', 'FontSize', 17, 'FontName', '宋体');
 	ylabel('关节加速度(rad/s^{2})', 'FontSize', 17, 'FontName', '宋体');
 	legend('滤波前', '滤波后', 'FontName', '宋体', 'FontSize', 12);
     print(i + 12, '-dpng', '-r600', [path_prefix, 'Joint', num2str(i), 'Acc.png'])

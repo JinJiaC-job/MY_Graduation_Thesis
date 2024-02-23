@@ -18,10 +18,22 @@ q_filt = filtfilt(b, a, q_raw);
 
 %% VISUALIZATION
 for i = 1:6
+    if i==1
 	figure(i);
 	plot(q_raw(:, i), 'g', 'LineWidth', 1.0); hold on;
 	plot(q_filt(:, i), 'r', 'LineWidth', 0.5); hold off;
 	title(['第', num2str(i), '关节位置滤波结果'], 'FontSize', 17, 'FontName', '宋体');
+    xlabel('采样点', 'FontSize', 17, 'FontName', '宋体');
+	ylabel('关节位置(mm)', 'FontSize', 17, 'FontName', '宋体');
+	legend('滤波前', '滤波后', 'FontName', '宋体', 'FontSize', 12);
+    print(i, '-dpng', '-r600', [path_prefix, 'Joint', num2str(i), 'Rad.png']);
+    end
+
+    figure(i);
+	plot(q_raw(:, i), 'g', 'LineWidth', 1.0); hold on;
+	plot(q_filt(:, i), 'r', 'LineWidth', 0.5); hold off;
+	title(['第', num2str(i), '关节位置滤波结果'], 'FontSize', 17, 'FontName', '宋体');
+    xlabel('采样点', 'FontSize', 17, 'FontName', '宋体');
 	ylabel('关节角度(rad)', 'FontSize', 17, 'FontName', '宋体');
 	legend('滤波前', '滤波后', 'FontName', '宋体', 'FontSize', 12);
     print(i, '-dpng', '-r600', [path_prefix, 'Joint', num2str(i), 'Rad.png']);
